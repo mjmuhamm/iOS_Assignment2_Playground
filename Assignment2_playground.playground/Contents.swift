@@ -178,14 +178,13 @@ actor ExampleActor {
 }
 
 //Async Let example
-
 func asyncExample() async {
     print("this is an example")
 }
 
 Task {
-    async let x1 = asyncExample()
-    async let x2 = asyncExample()
+    async let x1: () = asyncExample()
+    async let x2: () = asyncExample()
 
     await x1
     await x2
