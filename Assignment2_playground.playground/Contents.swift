@@ -81,7 +81,7 @@ class popularSportExercises : Basketball, Football {
 
 //ARC
 //example class
-// The Retain Cycle is prevalent in this class because Student depends of TypeOfBatch and TypeOfBatch is dependent on Student, so if not handled with a weak var, or declaring the depending variable to nil at the end of its use necessity
+// The Retain Cycle is prevalent in this class because Student depends on TypeOfBatch and TypeOfBatch is dependent on Student, so if not handled with a weak var, or declaring the depending variable to nil at the end of its use necessity, The Retain Cycle will not decompress in the most optimal capacity
 class Student {
     //Batch is weak var because Student is the least important variable, prevents excess Memory issues with Batch Dependency in the Retain Cylce
     weak var batchName: TypeOfBatch?
@@ -162,6 +162,7 @@ let op2 = BlockOperation {
 
 operationQueue.addOperations([op1, op2], waitUntilFinished: true)
 
+
 //actor - allows for thread safety prevents race condition (multiple threads accessing the same data files at the same time
 actor ExampleActor {
     var x : String
@@ -182,8 +183,15 @@ func asyncExample() async {
     print("this is an example")
 }
 
-async let x1 = asyncExample()
-async let x2 = asyncExample()
+Task {
+    async let x1 = asyncExample()
+    async let x2 = asyncExample()
+
+    await x1
+    await x2
+
+}
+
 
 
 
